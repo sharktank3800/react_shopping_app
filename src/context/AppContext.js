@@ -71,3 +71,27 @@ const initialState = {
 // create the context this is the thing our components import and use to get the state
 export const AppContext = createContext();
 
+// Provider component - wraps the components we want to give access to the state
+// accepts the children, which are the nested(wrapped) components
+export const AppProvider = (props) => {
+    // sets up the app state. Takes a reducer, and an initial state
+    const [state, dispatch] = useReducer(AppReducer, initialState);
+
+    const totalExpenses = state.expenses.reduce((total, item) => {
+        return (total = total + (item.unitprice*item.quantity));
+    }, 0);
+    state.CartValue = totalExpenses;
+
+    return (
+        <AppContext.Provider 
+            value ={{
+                expenses: state.expenses,
+                CartValue: state.CartValue,
+                dispatch,
+                Location: state.Location
+            }}
+        >
+            {props.children}
+        </AppContext.Provider>
+    );
+};
