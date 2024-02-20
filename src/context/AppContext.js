@@ -65,7 +65,7 @@ const initialState = {
         {id: "Dinner set", name: "Dinner set", quantity: 0, unitprice:600},
         {id: "Bags", name: "Bags", quantity: 0, unitprice:200},
     ],
-    Location: "$"
+    Location: "£"
 };
 
 // create the context this is the thing our components import and use to get the state
